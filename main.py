@@ -1,3 +1,4 @@
+from core.firewall import ban_ip, check_unban
 import yaml
 from detectors.bruteforce import detect_bruteforce
 
@@ -14,5 +15,9 @@ print("Failed attempts per IP:")
 print(failed_attempts)
 
 print("\nSECURITY ALERTS:")
+
+check_unban()
+
 for ip, count in alerts:
     print(f"🚨 Brute-force suspected from IP {ip} ({count} failed attempts)")
+    ban_ip(ip)
